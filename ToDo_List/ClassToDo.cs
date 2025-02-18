@@ -105,19 +105,19 @@ class ClassToDo
     }
 
 
-    public void ChangeOfStatus(string id, string status)
+    public void ChangeOfStatus(string? id, string status)
     {
         var thisNote = Search(id);
         if (thisNote == null)
         {
-            Console.WriteLine("Заметки с таким Id не существует");
+            Console.WriteLine("Заметки с таким Id не существует, \n или вы ничего не ввели");
             Console.WriteLine();
         }
         else
         {
             thisNote.Remove("Status");
             thisNote.Add("Status", status);
-            Console.WriteLine("Изменение произошло успешно");
+            Console.WriteLine("Статус успешно изменён");
             Console.WriteLine();
         }
     }

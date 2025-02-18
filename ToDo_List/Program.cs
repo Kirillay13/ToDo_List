@@ -2,10 +2,12 @@
 using System.Security.Cryptography.X509Certificates;
 using ToDo_List;
 // можно после поиска по id добатить окошко с функциями изменить название или текст
-string? task;
+
 List<Dictionary<string, string>> notes = new List<Dictionary<string, string>>();
-ClassToDo toDo = new ClassToDo(notes);
+ClassToDo todo = new ClassToDo(notes);
+string? task;
 string? id;
+string? status;
 do
 {
     Console.WriteLine("1. Создать заметку");
@@ -32,43 +34,42 @@ do
             {
                 text = "Undefined";
             }
-            string? status;
-            do
+            Console.WriteLine("Выберите статус заметки: ");
+            Console.WriteLine("1. Планируется");
+            Console.WriteLine("2. Выполняется");
+            Console.WriteLine("3. Завершено");
+            Console.WriteLine("0. Назад");
+            status = Console.ReadLine();
+            if (status == "1")
             {
-                Console.WriteLine("Выберите статус заметки: ");
-                Console.WriteLine("1. Планируется");
-                Console.WriteLine("2. Выполняется");
-                Console.WriteLine("3. Завершено");
-                Console.WriteLine("0. Назад");
-                status = Console.ReadLine();
-                if (status == "1")
-                {
-                    toDo.CreateNote(name, text, "Планируется");
-                    break;
-                }
-                else if (status == "2")
-                {
-                    toDo.CreateNote(name, text, "Выполняется");
-                    break;
-                }
-                else if (status == "3")
-                {
-                    toDo.CreateNote(name, text, "Завершено");
-                    break;
-                }
-                else if (status == null)
-                {
-                    Console.WriteLine("Вы ничего не ввели");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Вы ввели некорректное значение");
-                    break;
-                }
-            } while (status != "0");
-            Console.WriteLine();
-            break;
+                todo.CreateNote(name, text, "Планируется");
+                Console.WriteLine();
+                break;
+            }
+            else if (status == "2")
+            {
+                todo.CreateNote(name, text, "Выполняется");
+                Console.WriteLine();
+                break;
+            }
+            else if (status == "3")
+            {
+                todo.CreateNote(name, text, "Завершено");
+                Console.WriteLine();
+                break;
+            }
+            else if (status == null)
+            {
+                Console.WriteLine("Вы ничего не ввели");
+                Console.WriteLine();
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Вы ввели некорректное значение");
+                Console.WriteLine();
+                break;
+            }
 
         case "2":
             Console.Write("Введите Id заметки, которую хотите удалить: ");
@@ -78,17 +79,17 @@ do
                 Console.WriteLine("Вы ничего не ввели");
                 break;
             }
-            toDo.RemoveNote(id);
+            todo.RemoveNote(id);
             break;
 
         case "3":
-            toDo.ShowAllNote();
+            todo.ShowAllNote();
             break;
 
         case "4":
             Console.Write("Введите Id заметки:");
             id = Console.ReadLine();
-            toDo.SearchByID(id);
+            todo.SearchByID(id);
             if (id == null)
             {
                 Console.WriteLine("Вы ничего не ввели");
@@ -111,7 +112,22 @@ do
             Console.WriteLine("2. Выполняется");
             Console.WriteLine("3. Завершено");
             Console.WriteLine("0. Назад");
-            //toDo.ChangeOfStatus(id, status);
+            status = Console.ReadLine();
+            if (status == "0")
+            {
+                break;
+            }
+            else if (status != "1" || status != "2" || status != "3")
+            {
+                Console.WriteLine("Вы ввели некорректное значение");
+                break;
+            }
+            else if (status == null)
+            {
+                Console.WriteLine("Вы ничего не ввели");
+                break;
+            }
+            todo.ChangeOfStatus(id, status); 
             break;
 
         case "":
