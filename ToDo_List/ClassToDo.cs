@@ -12,7 +12,11 @@ namespace ToDo_List;
 class ClassToDo
 {
     private int id = 1;
-    public List<Dictionary<string, string>> notes = new List<Dictionary<string, string>>();
+    private List<Dictionary<string, string>> notes;
+    public ClassToDo(List<Dictionary<string, string>> notes)
+    {
+        this.notes = notes;
+    }
     public void CreateNote(string name, string text, string status)
     {
         Dictionary<string, string> note = new Dictionary<string, string>()
@@ -72,6 +76,7 @@ class ClassToDo
             Console.WriteLine($"Text: {note["Text"]}");
             Console.WriteLine($"Status: {note["Status"]}");
             Console.WriteLine();
+
         }
     }
 
@@ -113,7 +118,11 @@ class ClassToDo
     }
 
 
+    //public bool Validation()
+    //{
 
+    //    return;
+    //}
 
 
 

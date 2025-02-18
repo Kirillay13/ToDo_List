@@ -1,6 +1,8 @@
 ﻿using ToDo_List;
-
-int task;
+// можно после поиска по id добатить окошко с функциями изменить название или текст
+string? task;
+List<Dictionary<string, string>> notes = new List<Dictionary<string, string>>();
+ClassToDo toDo = new ClassToDo(notes);
 do
 {
     Console.WriteLine("1. Создать заметку");
@@ -9,16 +11,25 @@ do
     Console.WriteLine("4. Поиск заметки по Id");
     Console.WriteLine("5. Изменить статус заметки");
     Console.WriteLine("0. Выход");
-    task = Convert.ToInt32(Console.ReadLine());
+    task = Console.ReadLine();
     Console.WriteLine();
-    ClassToDo toDo = new ClassToDo();
     switch (task)
     {
-        case 1:
+        case "1":
             Console.Write("Введите название заметки: ");
-            string name = Console.ReadLine();
+            string? name = Console.ReadLine();
+            if (name == null)
+            {
+                Console.WriteLine("Имя должно быть обязательно\n можете попробовать создать заметку его ещё раз");
+                break;
+
+            }
             Console.Write("Введите текст: ");
-            string text = Console.ReadLine();
+            string? text = Console.ReadLine();
+            if (text == null)
+            {
+                text = "Undefined";
+            }
             int status;
             do
             {
@@ -46,12 +57,12 @@ do
             } while (status != 0);
             Console.WriteLine();
             break;
-        case 2:
+        case "2":
             break;
-        case 3:
+        case "3":
             toDo.ShowAllNote();
             break;
-        case 4:
+        case "4":
             Console.Write("Введите Id заметки:");
             string? id = Console.ReadLine();
             toDo.SearchByID(id);
@@ -61,6 +72,13 @@ do
                 break;
             }
             break;
+        
+        case "5":
+            break;
+        case null:
+            Console.WriteLine("Вы ничего не ввели, нажмите '0', если хотите выйти из программы");
+            Console.WriteLine();
+            break;
     }
 
-} while (task != 0);
+} while (task != "0");
