@@ -55,7 +55,7 @@ class ClassToDo
         if (res == null)
         {
             Console.WriteLine("Заметки с таким Id не существует");
-            Console.WriteLine();
+            Console.WriteLine("Вот список существующих заметок:");
             ShowAllNote();
         }
         else
@@ -69,6 +69,11 @@ class ClassToDo
 
     public void ShowAllNote()
     {
+        if (notes.Count == 0)
+        {
+            Console.WriteLine("Список пуст");
+            Console.WriteLine();
+        }
         foreach (var note in notes)
         {
             Console.WriteLine($"Id: {note["Id"]}");
