@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.Design;
 using System.Security.Cryptography.X509Certificates;
 using ToDo_List;
-// можно после поиска по id добатить окошко с функциями изменить название или текст
 
 List<Dictionary<string, string>> notes = new List<Dictionary<string, string>>();
 ClassToDo todo = new ClassToDo(notes);

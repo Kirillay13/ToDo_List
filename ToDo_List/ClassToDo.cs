@@ -121,49 +121,5 @@ class ClassToDo
             Console.WriteLine();
         }
     }
-
-
-    //public bool Validation()
-    //{
-
-    //    return;
-    //}
-
-
-
-    //public void SearchByID(string id)
-    //{
-    //    for (int i = 0; i < notes.Count; i++)
-    //    {
-    //        if (notes[i]["Id"].ToString() == id)
-    //        {
-    //            var ournote = notes[i];
-    //            Console.WriteLine($"Id: {ournote["Id"]}");
-    //            Console.WriteLine($"Name: {ournote["Name"]}");
-    //            Console.WriteLine($"Text: {ournote["Text"]}");
-    //            Console.WriteLine($"Status: {ournote["Status"]}");
-    //            Console.WriteLine();
-    //            return;
-    //        }
-    //    }
-    //    Console.WriteLine("Заметки с таким Id не существует");
-    //    Console.WriteLine();
-    //}
-
-
-    //public void RemoveNote(string id)
-    //{
-    //    for(int i = 0; i < notes.Count; i++)
-    //    {
-    //        if (notes[i]["Id"].ToString() == id)
-    //        {
-    //            notes.RemoveAt(i);
-    //            Console.WriteLine("Заметка успешно удалена");
-    //            return;
-    //        }
-    //    }
-    //    Console.WriteLine("Данный Id не найден");
-    //    ShowAllNote();
-    //}
 }
 
