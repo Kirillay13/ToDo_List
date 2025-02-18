@@ -12,10 +12,10 @@ namespace ToDo_List;
 class ClassToDo
 {
     private int id = 1;
-    List<Dictionary<string, string>> notes = new List<Dictionary<string, string>>();
+    public List<Dictionary<string, string>> notes = new List<Dictionary<string, string>>();
     public void CreateNote(string name, string text, string status)
     {
-        Dictionary<string, string> note = new Dictionary<string, string>() 
+        Dictionary<string, string> note = new Dictionary<string, string>()
         {
             { "Id", id.ToString() },
             { "Name", name },
@@ -23,11 +23,17 @@ class ClassToDo
             { "Status", status }
         };
         notes.Add(note);
+        Console.WriteLine($"Id заметки: {id}");
         id++;
+        Console.WriteLine("Заметка успешно создана");
     }
 
-    Dictionary<string, string>? Search(string id)
+    Dictionary<string, string>? Search(string? id)
     {
+        if (id == null)
+        {
+            return null;
+        }
         Dictionary<string, string> result = new Dictionary<string, string>();
         for (int i = 0; i < notes.Count; i++)
         {
@@ -39,7 +45,7 @@ class ClassToDo
         return null;
     }
 
-    public void RemoveNote(string id)
+    public void RemoveNote(string? id)
     {
         var res = Search(id);
         if (res == null)
@@ -59,7 +65,7 @@ class ClassToDo
 
     public void ShowAllNote()
     {
-        foreach(var note in notes)
+        foreach (var note in notes)
         {
             Console.WriteLine($"Id: {note["Id"]}");
             Console.WriteLine($"Name: {note["Name"]}");
@@ -70,7 +76,7 @@ class ClassToDo
     }
 
 
-    public void SearchByID(string id)
+    public void SearchByID(string? id)
     {
         var res = Search(id);
         if (res == null)
@@ -105,6 +111,8 @@ class ClassToDo
             Console.WriteLine();
         }
     }
+
+
 
 
 
