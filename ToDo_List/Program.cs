@@ -116,9 +116,19 @@ do
             {
                 break;
             }
-            else if (status != "1" || status != "2" || status != "3")
+            else if(status == "1")
             {
-                Console.WriteLine("Вы ввели некорректное значение");
+                todo.ChangeOfStatus(id, "Планируется");
+                break;
+            }
+            else if (status == "2")
+            {
+                todo.ChangeOfStatus(id, "Выполняется");
+                break;
+            }
+            else if (status == "3")
+            {
+                todo.ChangeOfStatus(id, "Завершено");
                 break;
             }
             else if (status == null)
@@ -126,12 +136,16 @@ do
                 Console.WriteLine("Вы ничего не ввели");
                 break;
             }
-            todo.ChangeOfStatus(id, status); 
-            break;
+            else
+            {
+                Console.WriteLine("Вы ввели некорректное значение");
+                break;
+            }
+            
 
         case "":
-            Console.WriteLine("Вы ничего не ввели, нажмите '0', если хотите выйти из программы");
-            break;
-    }
+                    Console.WriteLine("Вы ничего не ввели, нажмите '0', если хотите выйти из программы");
+                    break;
+                }
 
 } while (task != "0");
