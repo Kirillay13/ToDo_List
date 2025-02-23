@@ -1,62 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToDo_List;
+﻿namespace ToDo_List;
 
 
 class ClassToDo
 {
     private int id = 1;
-    private List<Dictionary<string, string>> notes;
-    public ClassToDo(List<Dictionary<string, string>> notes)
+    private List<Note> notes;
+    public ClassToDo(List<Note> notes)
     {
         this.notes = notes;
     }
-    public void CreateNote(string name, string text, string status)
+    public void CreateNote(string name, string text, Status status)
     {
-        Dictionary<string, string> note = new Dictionary<string, string>()
+        var note = new Note()
         {
-            { "Id", id.ToString() },
-            { "Name", name },
-            { "Text", text },
-            { "Status", status }
+            Id = id,
+            Text = text,
+            Status = status,
+            Name = name
         };
+
         notes.Add(note);
-        Console.WriteLine($"Id заметки: {id}");
-        id++;
+        Console.WriteLine($"Id заметки: {id++}");
         Console.WriteLine("Заметка успешно создана");
     }
 
-    Dictionary<string, string>? Search(string? id)
+    private Note Search(int id)
     {
-        if (id == null)
-        {
-            return null;
-        }
-        Dictionary<string, string> result = new Dictionary<string, string>();
-        for (int i = 0; i < notes.Count; i++)
-        {
-            if (notes[i]["Id"].ToString() == id)
-            {
-                return result = notes[i];
-            }
-        }
-        return null;
+        return notes.FirstOrDefault(x => x.Id == id);
     }
 
-    public void RemoveNote(string? id)
+    public void RemoveNote(int id)
     {
         var res = Search(id);
+
         if (res == null)
         {
             Console.WriteLine("Заметки с таким Id не существует");
             Console.WriteLine("Вот список существующих заметок:");
-            ShowAllNote();
+            ShowAllNotes();
         }
         else
         {
@@ -66,8 +47,7 @@ class ClassToDo
         }
     }
 
-
-    public void ShowAllNote()
+    public void ShowAllNotes()
     {
         if (notes.Count == 0)
         {
@@ -76,19 +56,15 @@ class ClassToDo
         }
         foreach (var note in notes)
         {
-            Console.WriteLine($"Id: {note["Id"]}");
-            Console.WriteLine($"Name: {note["Name"]}");
-            Console.WriteLine($"Text: {note["Text"]}");
-            Console.WriteLine($"Status: {note["Status"]}");
-            Console.WriteLine();
-
+            Console.WriteLine(note + Environment.NewLine);
         }
     }
 
 
-    public void SearchByID(string? id)
+    public void SearchByID(int id)
     {
         var res = Search(id);
+
         if (res == null)
         {
             Console.WriteLine("Заметки с таким Id не существует");
@@ -96,18 +72,15 @@ class ClassToDo
         }
         else
         {
-            Console.WriteLine($"Id: {res["Id"]}");
-            Console.WriteLine($"Name: {res["Name"]}");
-            Console.WriteLine($"Text: {res["Text"]}");
-            Console.WriteLine($"Status: {res["Status"]}");
-            Console.WriteLine();
+            Console.WriteLine(res + Environment.NewLine);
         }
     }
 
 
-    public void ChangeOfStatus(string? id, string status)
+    public void ChangeNoteStatus(int id, Status status)
     {
         var thisNote = Search(id);
+
         if (thisNote == null)
         {
             Console.WriteLine("Заметки с таким Id не существует, \n или вы ничего не ввели");
@@ -115,8 +88,7 @@ class ClassToDo
         }
         else
         {
-            thisNote.Remove("Status");
-            thisNote.Add("Status", status);
+            thisNote.Status = status;
             Console.WriteLine("Статус успешно изменён");
             Console.WriteLine();
         }
